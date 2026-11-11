@@ -1,0 +1,7 @@
+{
+ "conditions": {
+  "smoke_direct": "complete",
+  "smoke_l1": "complete"
+ },
+ "decisions": []
+}

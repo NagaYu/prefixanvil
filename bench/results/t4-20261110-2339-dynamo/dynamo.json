@@ -1,0 +1,224 @@
+{
+ "schema": "prefixanvil.bench.dynamo/v1",
+ "timebox_min": 90.0,
+ "steps": [
+  {
+   "step": "precondition",
+   "t_min": 0.0,
+   "ok": true,
+   "gpus": [
+    "Tesla T4",
+    "Tesla T4"
+   ],
+   "driver_cuda": "13.0"
+  },
+  {
+   "step": "install",
+   "t_min": 0.8,
+   "ok": true,
+   "seconds": 43
+  },
+  {
+   "step": "import_check",
+   "t_min": 1.1,
+   "ok": true,
+   "torch": "2.13.0+cu132",
+   "cuda": "13.2",
+   "gpus": 2,
+   "vllm": "0.31.0"
+  },
+  {
+   "step": "a_rr_raw:cluster_up",
+   "t_min": 4.1,
+   "seconds": 180
+  },
+  {
+   "step": "a_rr_raw:done",
+   "t_min": 11.7,
+   "hit_rate": 0.6036866480091525,
+   "errors": 0
+  },
+  {
+   "step": "b_kv_raw:cluster_up",
+   "t_min": 13.4,
+   "seconds": 90
+  },
+  {
+   "step": "b_kv_raw:done",
+   "t_min": 20.9,
+   "hit_rate": 0.6015084835839183,
+   "errors": 0
+  },
+  {
+   "step": "c_kv_l1:cluster_up",
+   "t_min": 23.0,
+   "seconds": 115
+  },
+  {
+   "step": "c_kv_l1:done",
+   "t_min": 30.1,
+   "hit_rate": 0.6520170721071896,
+   "errors": 0
+  }
+ ],
+ "conditions": {
+  "a_rr_raw": {
+   "router_mode": "round-robin",
+   "proxy_l1": false,
+   "requests": 150,
+   "wall_s": 456.7644011974335,
+   "per_endpoint": {
+    "worker0": {
+     "prefix_cache_hits": 115648.0,
+     "prefix_cache_queries": 191703.0,
+     "names": {
+      "prefix_cache_hits": "vllm:prefix_cache_hits_total",
+      "prefix_cache_queries": "vllm:prefix_cache_queries_total",
+      "prefill_kv_computed_sum": "vllm:request_prefill_kv_computed_tokens_sum",
+      "prefill_kv_computed_count": "vllm:request_prefill_kv_computed_tokens_count",
+      "prompt_tokens": "vllm:prompt_tokens_total",
+      "prompt_tokens_cached": "vllm:prompt_tokens_cached_total",
+      "generation_tokens": "vllm:generation_tokens_total",
+      "request_success": "vllm:request_success_total",
+      "preemptions": "vllm:num_preemptions_total"
+     }
+    },
+    "worker1": {
+     "prefix_cache_hits": 114944.0,
+     "prefix_cache_queries": 190270.0,
+     "names": {
+      "prefix_cache_hits": "vllm:prefix_cache_hits_total",
+      "prefix_cache_queries": "vllm:prefix_cache_queries_total",
+      "prefill_kv_computed_sum": "vllm:request_prefill_kv_computed_tokens_sum",
+      "prefill_kv_computed_count": "vllm:request_prefill_kv_computed_tokens_count",
+      "prompt_tokens": "vllm:prompt_tokens_total",
+      "prompt_tokens_cached": "vllm:prompt_tokens_cached_total",
+      "generation_tokens": "vllm:generation_tokens_total",
+      "request_success": "vllm:request_success_total",
+      "preemptions": "vllm:num_preemptions_total"
+     }
+    },
+    "frontend": {
+     "prefix_cache_hits": null,
+     "prefix_cache_queries": null,
+     "names": {}
+    }
+   },
+   "worker_counters_found": true,
+   "hit_rate_workers_sum": 0.6036866480091525,
+   "usage_cached_tokens": 230592,
+   "usage_prompt_tokens": 381973,
+   "errors": 0,
+   "ttft_p50_s": 0.9871569405000855,
+   "ttft_p95_s": 4.266716806249995
+  },
+  "b_kv_raw": {
+   "router_mode": "kv",
+   "proxy_l1": false,
+   "requests": 150,
+   "wall_s": 454.1343002319336,
+   "per_endpoint": {
+    "worker0": {
+     "prefix_cache_hits": 119696.0,
+     "prefix_cache_queries": 196509.0,
+     "names": {
+      "prefix_cache_hits": "vllm:prefix_cache_hits_total",
+      "prefix_cache_queries": "vllm:prefix_cache_queries_total",
+      "prefill_kv_computed_sum": "vllm:request_prefill_kv_computed_tokens_sum",
+      "prefill_kv_computed_count": "vllm:request_prefill_kv_computed_tokens_count",
+      "prompt_tokens": "vllm:prompt_tokens_total",
+      "prompt_tokens_cached": "vllm:prompt_tokens_cached_total",
+      "generation_tokens": "vllm:generation_tokens_total",
+      "request_success": "vllm:request_success_total",
+      "preemptions": "vllm:num_preemptions_total"
+     }
+    },
+    "worker1": {
+     "prefix_cache_hits": 110064.0,
+     "prefix_cache_queries": 185464.0,
+     "names": {
+      "prefix_cache_hits": "vllm:prefix_cache_hits_total",
+      "prefix_cache_queries": "vllm:prefix_cache_queries_total",
+      "prefill_kv_computed_sum": "vllm:request_prefill_kv_computed_tokens_sum",
+      "prefill_kv_computed_count": "vllm:request_prefill_kv_computed_tokens_count",
+      "prompt_tokens": "vllm:prompt_tokens_total",
+      "prompt_tokens_cached": "vllm:prompt_tokens_cached_total",
+      "generation_tokens": "vllm:generation_tokens_total",
+      "request_success": "vllm:request_success_total",
+      "preemptions": "vllm:num_preemptions_total"
+     }
+    },
+    "frontend": {
+     "prefix_cache_hits": null,
+     "prefix_cache_queries": null,
+     "names": {}
+    }
+   },
+   "worker_counters_found": true,
+   "hit_rate_workers_sum": 0.6015084835839183,
+   "usage_cached_tokens": 229760,
+   "usage_prompt_tokens": 381973,
+   "errors": 0,
+   "ttft_p50_s": 0.7811823005000633,
+   "ttft_p95_s": 4.242875888650052
+  },
+  "c_kv_l1": {
+   "router_mode": "kv",
+   "proxy_l1": true,
+   "requests": 150,
+   "wall_s": 421.096622467041,
+   "per_endpoint": {
+    "worker0": {
+     "prefix_cache_hits": 113664.0,
+     "prefix_cache_queries": 177456.0,
+     "names": {
+      "prefix_cache_hits": "vllm:prefix_cache_hits_total",
+      "prefix_cache_queries": "vllm:prefix_cache_queries_total",
+      "prefill_kv_computed_sum": "vllm:request_prefill_kv_computed_tokens_sum",
+      "prefill_kv_computed_count": "vllm:request_prefill_kv_computed_tokens_count",
+      "prompt_tokens": "vllm:prompt_tokens_total",
+      "prompt_tokens_cached": "vllm:prompt_tokens_cached_total",
+      "generation_tokens": "vllm:generation_tokens_total",
+      "request_success": "vllm:request_success_total",
+      "preemptions": "vllm:num_preemptions_total"
+     }
+    },
+    "worker1": {
+     "prefix_cache_hits": 133056.0,
+     "prefix_cache_queries": 200939.0,
+     "names": {
+      "prefix_cache_hits": "vllm:prefix_cache_hits_total",
+      "prefix_cache_queries": "vllm:prefix_cache_queries_total",
+      "prefill_kv_computed_sum": "vllm:request_prefill_kv_computed_tokens_sum",
+      "prefill_kv_computed_count": "vllm:request_prefill_kv_computed_tokens_count",
+      "prompt_tokens": "vllm:prompt_tokens_total",
+      "prompt_tokens_cached": "vllm:prompt_tokens_cached_total",
+      "generation_tokens": "vllm:generation_tokens_total",
+      "request_success": "vllm:request_success_total",
+      "preemptions": "vllm:num_preemptions_total"
+     }
+    },
+    "frontend": {
+     "prefix_cache_hits": null,
+     "prefix_cache_queries": null,
+     "names": {}
+    }
+   },
+   "worker_counters_found": true,
+   "hit_rate_workers_sum": 0.6520170721071896,
+   "usage_cached_tokens": 246720,
+   "usage_prompt_tokens": 378395,
+   "errors": 0,
+   "ttft_p50_s": 0.6250668705000635,
+   "ttft_p95_s": 4.2308469805001545
+  }
+ },
+ "status": "complete",
+ "spec": "ai-dynamo[vllm]==1.6.2",
+ "versions": {
+  "torch": "2.13.0+cu132",
+  "cuda": "13.2",
+  "gpus": 2,
+  "vllm": "0.31.0"
+ }
+}

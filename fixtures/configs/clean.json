@@ -1,0 +1,11 @@
+{
+  "sessions": 5,
+  "turns": 2,
+  "system_tokens": 300,
+  "tools": 5,
+  "tool_burst_min": 1,
+  "tool_burst_max": 2,
+  "retry_rate": 0.05,
+  "seed": 300,
+  "faults": {}
+}

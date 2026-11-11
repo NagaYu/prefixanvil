@@ -1,0 +1,102 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "non_json_tool_content",
+  "description": "Tool results that look like JSON but are not (broken JSON, JS-style object, scalar, indented text).",
+  "session": true,
+  "expect": {
+    "L1": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Agent."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "c1",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": "{\"q\": \"1\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "c1",
+          "content": "[1, 2"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "c2",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": "{\"q\": \"2\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "c2",
+          "content": "Result: {a: 1}\n    indented  line"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "c3",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": "{\"q\": \"3\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "c3",
+          "content": "42"
+        }
+      ],
+      "temperature": 0,
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "f",
+            "description": "Tool.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

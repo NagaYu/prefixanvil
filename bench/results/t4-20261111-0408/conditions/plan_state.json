@@ -1,0 +1,13 @@
+{
+ "conditions": {
+  "main_a_raw": "complete",
+  "main_b_l1": "complete",
+  "main_c_l2": "complete",
+  "xs_raw": "complete",
+  "xs_session": "complete",
+  "xs_stateless": "complete",
+  "c8_a_raw": "complete",
+  "c8_b_l1": "complete"
+ },
+ "decisions": []
+}

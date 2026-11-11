@@ -1,0 +1,35 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "content_parts_system",
+  "description": "System content given as a list of text parts (L1 must pass it through).",
+  "session": true,
+  "expect": {
+    "L1": "match",
+    "L2": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": [
+            {
+              "type": "text",
+              "text": "Part  one.  "
+            },
+            {
+              "type": "text",
+              "text": "\n\n\nPart two."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        }
+      ],
+      "temperature": 0
+    }
+  ]
+}

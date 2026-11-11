@@ -1,0 +1,31 @@
+{
+  "schema": "prefixanvil.gate-baseline/v1",
+  "prefixanvil_version": "0.2.0",
+  "trace": {
+    "path": "demo.jsonl",
+    "sha256": "sha256:c931b51bc4af9e7e67bb374d"
+  },
+  "analyzer": {
+    "block_size": 16,
+    "num_blocks": 8192,
+    "hash_model_name": false,
+    "session_aware_l1": true,
+    "order": "file",
+    "tokenizer_is_fixture": true,
+    "template_version": "sha256:8f995507d5a92cdc"
+  },
+  "metrics": {
+    "i_raw": {
+      "hit_rate": 0.6561145989919533,
+      "prefill_tokens": 15556,
+      "prompt_tokens": 45236,
+      "requests": 36
+    },
+    "ii_l1": {
+      "hit_rate": 0.7043042260858241,
+      "prefill_tokens": 13623,
+      "prompt_tokens": 46071,
+      "requests": 36
+    }
+  }
+}

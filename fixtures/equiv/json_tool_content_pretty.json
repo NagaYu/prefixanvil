@@ -1,0 +1,64 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "json_tool_content_pretty",
+  "description": "Pretty-printed JSON tool result and arguments with extra whitespace (pure re-serialization).",
+  "session": true,
+  "expect": {
+    "L1": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Agent."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "c1",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": "{ \"b\" : [1,2],\n  \"a\" : {\"y\": 1, \"x\": 2} }"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "c1",
+          "content": "{\n  \"status\": \"ok\",\n  \"items\": [3, 1, 2]\n}"
+        }
+      ],
+      "temperature": 0,
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "f",
+            "description": "Tool.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "unicode_escapes_in_arguments",
+  "description": "Arguments with \\u escapes; re-serialization emits the literal characters.",
+  "session": true,
+  "expect": {
+    "L1": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Agent."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "c1",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": "{\"name\": \"caf\\u00e9\", \"city\": \"\\u6771\\u4eac\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "c1",
+          "content": "ok"
+        }
+      ],
+      "temperature": 0,
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "f",
+            "description": "Tool.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

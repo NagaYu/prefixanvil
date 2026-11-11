@@ -1,0 +1,26 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "l2_volatile_in_code_block",
+  "description": "A timestamp line inside a fenced code block must not be moved by L2.",
+  "session": true,
+  "expect": {
+    "L1": "match",
+    "L2": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Example config:\n```\nts: 2026-01-01T00:00:00Z\n```\nUse it."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        }
+      ],
+      "temperature": 0
+    }
+  ]
+}

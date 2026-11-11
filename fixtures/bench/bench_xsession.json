@@ -1,0 +1,12 @@
+{
+  "seed": 3102,
+  "sessions": 30,
+  "turns": 2,
+  "system_tokens": 1200,
+  "tools": 10,
+  "tool_burst_min": 1,
+  "tool_burst_max": 2,
+  "retry_rate": 0.0,
+  "client_tool_order": "per_session_shuffle",
+  "faults": {}
+}

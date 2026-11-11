@@ -1,0 +1,27 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "l2_volatile_lines",
+  "description": "Timestamp, UUID and run-id lines near the top of the system prompt (L2 moves them to the end).",
+  "session": true,
+  "expect": {
+    "L1": "match",
+    "L2": "allowed-diff"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are Forge Agent.\nSession clock: 2026-01-15T09:04:26Z\nRequest id: 550e8400-e29b-41d4-a716-446655440000\n\nYou help with code.\n\nRun: run-000123\n\nGuidelines: be precise."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        }
+      ],
+      "temperature": 0
+    }
+  ],
+  "allowed_diff_reason": "L2 relocation changes line order inside the system message, which the mock's equivalence model treats as meaningful by design; whether a real model's output is unaffected must be measured on real models (Phase 3)."
+}

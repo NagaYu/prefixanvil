@@ -1,0 +1,510 @@
+{
+  "schema": "prefixanvil.equivalence-report/v1",
+  "prefixanvil_version": "0.2.0",
+  "build_fingerprint": "sha256:c5b87f48c3860fde00018139",
+  "suite": {
+    "path": "/kaggle/working/pf/prefixanvil/fixtures/equiv",
+    "sha256": "sha256:36401b83d14b1a6bbc05c765",
+    "cases": 15
+  },
+  "upstream": {
+    "kind": "mock",
+    "equivalence_model": "prefixanvil.mock-upstream/v1"
+  },
+  "summary": {
+    "L1": {
+      "cases": 15,
+      "requests": 19,
+      "exact_match": 19,
+      "exact_match_rate": 1.0
+    },
+    "L2": {
+      "cases": 6,
+      "requests": 6,
+      "exact_match": 5,
+      "exact_match_rate": 0.8333333333333334
+    }
+  },
+  "allowed_diffs": [
+    {
+      "case": "l2_volatile_lines",
+      "mode": "L2",
+      "reason": "L2 relocation changes line order inside the system message, which the mock's equivalence model treats as meaningful by design; whether a real model's output is unaffected must be measured on real models (Phase 3)."
+    }
+  ],
+  "unexpected_mismatches": [],
+  "errors": [],
+  "passed": true,
+  "results": [
+    {
+      "case": "content_parts_system",
+      "file": "content_parts_system.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "System content given as a list of text parts (L1 must pass it through).",
+      "requests": [
+        {
+          "index": 0,
+          "changed": false,
+          "rules": [],
+          "skipped": [
+            "L1.system.whitespace:non_string_content"
+          ],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "content_parts_system",
+      "file": "content_parts_system.json",
+      "mode": "L2",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "System content given as a list of text parts (L1 must pass it through).",
+      "requests": [
+        {
+          "index": 0,
+          "changed": false,
+          "rules": [],
+          "skipped": [
+            "L1.system.whitespace:non_string_content",
+            "L2.system.relocate_volatile_lines:non_string_content"
+          ],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "dict_arguments",
+      "file": "dict_arguments.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Assistant tool_call with arguments as an object instead of a string.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.json_string.normalize",
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "duplicate_tool_names",
+      "file": "duplicate_tool_names.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Two tools share a name (with different schemas); name sort must not apply, key order differs.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [
+            "L1.tools.sort_by_name:duplicate_tool_names"
+          ],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "json_tool_content_pretty",
+      "file": "json_tool_content_pretty.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Pretty-printed JSON tool result and arguments with extra whitespace (pure re-serialization).",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.json_string.normalize",
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "l2_volatile_in_code_block",
+      "file": "l2_volatile_in_code_block.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "A timestamp line inside a fenced code block must not be moved by L2.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": false,
+          "rules": [],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "l2_volatile_in_code_block",
+      "file": "l2_volatile_in_code_block.json",
+      "mode": "L2",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "A timestamp line inside a fenced code block must not be moved by L2.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": false,
+          "rules": [],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "l2_volatile_lines",
+      "file": "l2_volatile_lines.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Timestamp, UUID and run-id lines near the top of the system prompt (L2 moves them to the end).",
+      "requests": [
+        {
+          "index": 0,
+          "changed": false,
+          "rules": [],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "l2_volatile_lines",
+      "file": "l2_volatile_lines.json",
+      "mode": "L2",
+      "expect": "allowed-diff",
+      "outcome": "diff",
+      "ok": true,
+      "description": "Timestamp, UUID and run-id lines near the top of the system prompt (L2 moves them to the end).",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.system.whitespace",
+            "L2.system.relocate_volatile_lines"
+          ],
+          "skipped": [],
+          "match": false,
+          "first_diff": {
+            "char": 0,
+            "word": 0
+          }
+        }
+      ],
+      "allowed_diff_reason": "L2 relocation changes line order inside the system message, which the mock's equivalence model treats as meaningful by design; whether a real model's output is unaffected must be measured on real models (Phase 3)."
+    },
+    {
+      "case": "l2_volatile_lookalikes",
+      "file": "l2_volatile_lookalikes.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Lines that contain numbers/dates but are not volatile-only; L2 must leave them in place.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": false,
+          "rules": [],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "l2_volatile_lookalikes",
+      "file": "l2_volatile_lookalikes.json",
+      "mode": "L2",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Lines that contain numbers/dates but are not volatile-only; L2 must leave them in place.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": false,
+          "rules": [],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "nested_json_string_argument",
+      "file": "nested_json_string_argument.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Tool-call arguments whose value is itself a JSON string with significant key order; only the outer object may be re-serialized.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.json_string.normalize",
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "non_json_tool_content",
+      "file": "non_json_tool_content.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Tool results that look like JSON but are not (broken JSON, JS-style object, scalar, indented text).",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "stateless_no_session",
+      "file": "stateless_no_session.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "No session context: Phase-1 stateless name sort applies.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.tools.sort_by_name",
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "system_whitespace_drift",
+      "file": "system_whitespace_drift.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "System prompt with trailing newlines, double spaces and 3+ blank lines.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.system.whitespace"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "system_whitespace_drift",
+      "file": "system_whitespace_drift.json",
+      "mode": "L2",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "System prompt with trailing newlines, double spaces and 3+ blank lines.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.system.whitespace"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "tool_set_change_mid_session",
+      "file": "tool_set_change_mid_session.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Session where the tool set is shuffled, then shrinks, then grows.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [],
+          "match": true
+        },
+        {
+          "index": 1,
+          "changed": true,
+          "rules": [
+            "L1.tools.session_stable_order",
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [
+            "L1.tools.sort_by_name:session_order_pinned"
+          ],
+          "match": true
+        },
+        {
+          "index": 2,
+          "changed": true,
+          "rules": [
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [
+            "L1.tools.sort_by_name:tool_set_changed"
+          ],
+          "match": true
+        },
+        {
+          "index": 3,
+          "changed": true,
+          "rules": [
+            "L1.tools.session_stable_order",
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [
+            "L1.tools.sort_by_name:tool_set_changed"
+          ],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "tools_key_order",
+      "file": "tools_key_order.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Same tools with shuffled JSON key order across two requests.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [],
+          "match": true
+        },
+        {
+          "index": 1,
+          "changed": true,
+          "rules": [
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [
+            "L1.tools.sort_by_name:session_order_pinned"
+          ],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "unicode_escapes_in_arguments",
+      "file": "unicode_escapes_in_arguments.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Arguments with \\u escapes; re-serialization emits the literal characters.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.json_string.normalize",
+            "L1.tools.sort_keys"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "ws_code_block",
+      "file": "ws_code_block.json",
+      "mode": "L1",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Whitespace-sensitive system content: fenced code block with inner alignment spaces and an indented block; prose has double spaces and trailing whitespace.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.system.whitespace"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    },
+    {
+      "case": "ws_code_block",
+      "file": "ws_code_block.json",
+      "mode": "L2",
+      "expect": "match",
+      "outcome": "match",
+      "ok": true,
+      "description": "Whitespace-sensitive system content: fenced code block with inner alignment spaces and an indented block; prose has double spaces and trailing whitespace.",
+      "requests": [
+        {
+          "index": 0,
+          "changed": true,
+          "rules": [
+            "L1.system.whitespace"
+          ],
+          "skipped": [],
+          "match": true
+        }
+      ]
+    }
+  ]
+}

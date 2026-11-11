@@ -1,0 +1,67 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "dict_arguments",
+  "description": "Assistant tool_call with arguments as an object instead of a string.",
+  "session": true,
+  "expect": {
+    "L1": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Agent."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "c1",
+              "type": "function",
+              "function": {
+                "name": "f",
+                "arguments": {
+                  "b": 1,
+                  "a": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "c1",
+          "content": "ok"
+        }
+      ],
+      "temperature": 0,
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "f",
+            "description": "Tool.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

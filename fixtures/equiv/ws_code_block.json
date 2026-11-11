@@ -1,0 +1,26 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "ws_code_block",
+  "description": "Whitespace-sensitive system content: fenced code block with inner alignment spaces and an indented block; prose has double spaces and trailing whitespace.",
+  "session": true,
+  "expect": {
+    "L1": "match",
+    "L2": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "You are a coding assistant.  Follow the style below.   \n\n```python\ndef area(w,  h):\n    x  = w * h      # aligned comment\n    return  x\n```\n\nIndented note:\n    keep    this    spacing\n"
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        }
+      ],
+      "temperature": 0
+    }
+  ]
+}

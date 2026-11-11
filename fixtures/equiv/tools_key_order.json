@@ -1,0 +1,123 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "tools_key_order",
+  "description": "Same tools with shuffled JSON key order across two requests.",
+  "session": true,
+  "expect": {
+    "L1": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Agent."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        }
+      ],
+      "temperature": 0,
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "a",
+            "description": "Tool.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "b",
+            "description": "Tool.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Agent."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        },
+        {
+          "role": "assistant",
+          "content": "Hi."
+        },
+        {
+          "role": "user",
+          "content": "More."
+        }
+      ],
+      "temperature": 0,
+      "tools": [
+        {
+          "function": {
+            "parameters": {
+              "required": [
+                "q"
+              ],
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": "Tool.",
+            "name": "a"
+          },
+          "type": "function"
+        },
+        {
+          "function": {
+            "parameters": {
+              "required": [
+                "q"
+              ],
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": "Tool.",
+            "name": "b"
+          },
+          "type": "function"
+        }
+      ]
+    }
+  ]
+}

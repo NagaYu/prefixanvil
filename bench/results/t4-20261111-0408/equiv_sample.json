@@ -1,0 +1,429 @@
+{
+ "schema": "prefixanvil.bench.equiv-sample/v1",
+ "suite": {
+  "path": "/kaggle/working/pf/prefixanvil/fixtures/equiv",
+  "sha256": "sha256:36401b83d14b1a6bbc05c765"
+ },
+ "served_model": "pf-model",
+ "max_tokens": 64,
+ "seed": 0,
+ "summary": {
+  "control_raw_vs_raw": {
+   "pairs": 18,
+   "match": 18,
+   "rate": 1.0
+  },
+  "warm_cache_vs_cold": {
+   "pairs": 18,
+   "match": 17,
+   "rate": 0.9444444444444444
+  },
+  "L1_vs_raw": {
+   "pairs": 18,
+   "match": 10,
+   "rate": 0.5555555555555556
+  },
+  "L1_vs_raw_changed_only": {
+   "pairs": 14,
+   "match": 6,
+   "rate": 0.42857142857142855
+  },
+  "L2_vs_raw": {
+   "pairs": 6,
+   "match": 4,
+   "rate": 0.6666666666666666
+  },
+  "L2_vs_raw_changed_only": {
+   "pairs": 3,
+   "match": 1,
+   "rate": 0.3333333333333333
+  },
+  "errors": 1
+ },
+ "rows": [
+  {
+   "case": "content_parts_system",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "a022aa1fdbfeb885",
+   "L1": {
+    "match": true,
+    "unchanged_request": true
+   },
+   "L2": {
+    "match": true,
+    "unchanged_request": true
+   }
+  },
+  {
+   "case": "dict_arguments",
+   "index": 0,
+   "error": "RuntimeError: http_400:{\"error\":{\"message\":\"3 validation errors:\\n  {'type': 'string_type', 'loc': 'body.0.ChatCompletionMessageFunctionToolCallParam.function', 'msg': 'Input should be a valid string', 'input': '<dict of 2 "
+  },
+  {
+   "case": "duplicate_tool_names",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "b55763aa954bf9f0",
+   "L1": {
+    "match": true,
+    "rules": [
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "json_tool_content_pretty",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "3a81f60365729817",
+   "L1": {
+    "match": false,
+    "first_diff_char": 0,
+    "auto_tag": "needs_review",
+    "text_a": "The response from the tool indicates that it processed the input successfully and returned a list of items: [3, 1, 2]. If you need assistance with something specific related to this output or have another question, please let me know!",
+    "text_b": "It seems there was some confusion. Could you please provide more details about what you need help with?",
+    "rules": [
+     "L1.json_string.normalize",
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "l2_volatile_in_code_block",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "8e817ee1bb8c9673",
+   "L1": {
+    "match": true,
+    "unchanged_request": true
+   },
+   "L2": {
+    "match": true,
+    "unchanged_request": true
+   }
+  },
+  {
+   "case": "l2_volatile_lines",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "75e7e9c4c78650ec",
+   "L1": {
+    "match": true,
+    "unchanged_request": true
+   },
+   "L2": {
+    "match": false,
+    "first_diff_char": 172,
+    "auto_tag": "needs_review",
+    "text_a": "Of course! Could you please provide more details about what you need help with? Are you working on a specific piece of code, or do you have a particular problem or question related to programming? The more information you can give, the better I can assist you.",
+    "text_b": "Of course! Could you please provide more details about what you need help with? Are you working on a specific piece of code, or do you have a particular problem or question? The more information you can give, the better I can assist you.",
+    "rules": [
+     "L1.system.whitespace",
+     "L2.system.relocate_volatile_lines"
+    ]
+   }
+  },
+  {
+   "case": "l2_volatile_lookalikes",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": false,
+    "first_diff_char": 79,
+    "auto_tag": "needs_review",
+    "text_a": "Of course! Could you please provide more details about what you need help with?",
+    "text_b": "Of course! Could you please provide more details about what you need help with? Is it related to a specific task or problem?"
+   },
+   "raw_sha256": "b55763aa954bf9f0",
+   "L1": {
+    "match": true,
+    "unchanged_request": true
+   },
+   "L2": {
+    "match": true,
+    "unchanged_request": true
+   }
+  },
+  {
+   "case": "nested_json_string_argument",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "472b058f261c8981",
+   "L1": {
+    "match": false,
+    "first_diff_char": 23,
+    "auto_tag": "needs_review",
+    "text_a": "It seems there was an internal operation using the `post` function. If you need assistance with something specific, please provide more details.",
+    "text_b": "It seems there was an issue with the previous request format. Let's try again in a simpler way. Could you please provide more details about what you need help with?",
+    "rules": [
+     "L1.json_string.normalize",
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "non_json_tool_content",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "3f7242d0fdaeb55d",
+   "L1": {
+    "match": false,
+    "first_diff_char": 160,
+    "auto_tag": "needs_review",
+    "text_a": "It seems there was an issue with the previous calls. Let's try to clarify what you need. Could you please provide more details about what you're looking for or the task you want to accomplish?",
+    "text_b": "It seems there was an issue with the previous calls. Let's try to clarify what you need. Could you please provide more details about what you're looking for or what task you want to accomplish?",
+    "rules": [
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "stateless_no_session",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "b55763aa954bf9f0",
+   "L1": {
+    "match": true,
+    "rules": [
+     "L1.tools.sort_by_name",
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "system_whitespace_drift",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "21f2bfbe890c9352",
+   "L1": {
+    "match": true,
+    "rules": [
+     "L1.system.whitespace"
+    ]
+   },
+   "L2": {
+    "match": true,
+    "rules": [
+     "L1.system.whitespace"
+    ]
+   }
+  },
+  {
+   "case": "tool_set_change_mid_session",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "b55763aa954bf9f0",
+   "L1": {
+    "match": true,
+    "rules": [
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "tool_set_change_mid_session",
+   "index": 1,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "2d6e1486d79efdec",
+   "L1": {
+    "match": false,
+    "first_diff_char": 0,
+    "auto_tag": "needs_review",
+    "text_a": "Sure, could you please provide more details on what you need help with?",
+    "text_b": "b{\"q\": \"y\"}",
+    "rules": [
+     "L1.tools.session_stable_order",
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "tool_set_change_mid_session",
+   "index": 2,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "7a767f9623d83d26",
+   "L1": {
+    "match": false,
+    "first_diff_char": 97,
+    "auto_tag": "needs_review",
+    "text_a": "It seems like you might have intended to provide some input or context for the tools to work with, but no specific task was given. Could you please clarify what you need help with or provide more details about your request?",
+    "text_b": "It seems like you might have intended to provide some input or context for the tools to work with. Could you please clarify what you need help with specifically?",
+    "rules": [
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "tool_set_change_mid_session",
+   "index": 3,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "0f5a1bb65acc5131",
+   "L1": {
+    "match": false,
+    "first_diff_char": 63,
+    "auto_tag": "needs_review",
+    "text_a": "It seems like you might have intended to provide some input or use a specific tool, but the examples given (\"x\" and \"y\") don't clarify your request. Could you please provide more details about what you need help with? I'm here to assist you.",
+    "text_b": "It seems like you might have intended to provide some input or question, but it was not clear what exactly you needed help with. Could you please provide more details or ask your specific question? I'm here to assist you!",
+    "rules": [
+     "L1.tools.session_stable_order",
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "tools_key_order",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "b55763aa954bf9f0",
+   "L1": {
+    "match": true,
+    "rules": [
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "tools_key_order",
+   "index": 1,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "b55763aa954bf9f0",
+   "L1": {
+    "match": true,
+    "rules": [
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "unicode_escapes_in_arguments",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "a3ce6cfb5dae92ba",
+   "L1": {
+    "match": false,
+    "first_diff_char": 0,
+    "auto_tag": "needs_review",
+    "text_a": "It seems there was an internal operation but no specific result was returned. Could you please provide more details about what you need help with?",
+    "text_b": "Sure, I found a café in Tokyo for you. Would you like more information on this café or need assistance with something else?",
+    "rules": [
+     "L1.json_string.normalize",
+     "L1.tools.sort_keys"
+    ]
+   }
+  },
+  {
+   "case": "ws_code_block",
+   "index": 0,
+   "control": {
+    "match": true
+   },
+   "warm_cache": {
+    "match": true
+   },
+   "raw_sha256": "2febd55c0c26ebf6",
+   "L1": {
+    "match": false,
+    "first_diff_char": 49,
+    "auto_tag": "needs_review",
+    "text_a": "Of course! Could you please provide more details on what you need help with? Are you looking to modify or understand a specific piece of code, or do you have a particular problem you're trying to solve? The more details you can give, the better I can assist you.\n\nHere’s an example of how I can",
+    "text_b": "Of course! Could you please provide more details about what you need help with? Are you looking to understand a specific piece of code, or do you have a particular programming problem you're trying to solve? The more details you can give, the better I can assist you.",
+    "rules": [
+     "L1.system.whitespace"
+    ]
+   },
+   "L2": {
+    "match": false,
+    "first_diff_char": 49,
+    "auto_tag": "needs_review",
+    "text_a": "Of course! Could you please provide more details on what you need help with? Are you looking to modify or understand a specific piece of code, or do you have a particular problem you're trying to solve? The more details you can give, the better I can assist you.\n\nHere’s an example of how I can",
+    "text_b": "Of course! Could you please provide more details about what you need help with? Are you looking to understand a specific piece of code, or do you have a particular programming problem you're trying to solve? The more details you can give, the better I can assist you.",
+    "rules": [
+     "L1.system.whitespace"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,9 @@
+{"model": "agent-model", "session_id": "m-1", "messages": [{"role": "system", "content": "You are a bot."}, {"role": "user", "content": "hello"}]}
+{this is not json}
+{"model": "agent-model", "messages": []}
+{"messages": [{"role": "user", "content": "no model"}]}
+{"model": "agent-model", "messages": [{"role": "narrator", "content": "bad role"}]}
+
+{"model": "agent-model", "session_id": "m-1", "timestamp": "not-a-time", "messages": [{"role": "user", "content": "x"}]}
+{"model": "agent-model", "session_id": "m-1", "messages": [{"role": "system", "content": "You are a bot."}, {"role": "user", "content": "hello"}, {"role": "assistant", "content": "hi!"}, {"role": "user", "content": "bye"}]}
+{"model": "agent-model", "messages": [{"role": "user", "content": "single turn, no session, no tools"}]}

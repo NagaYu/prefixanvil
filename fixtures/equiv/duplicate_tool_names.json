@@ -1,0 +1,81 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "duplicate_tool_names",
+  "description": "Two tools share a name (with different schemas); name sort must not apply, key order differs.",
+  "session": true,
+  "expect": {
+    "L1": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Agent."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        }
+      ],
+      "temperature": 0,
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "search",
+            "description": "Web.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            }
+          }
+        },
+        {
+          "function": {
+            "parameters": {
+              "required": [
+                "q"
+              ],
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "description": "Docs.",
+            "name": "search"
+          },
+          "type": "function"
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "alpha",
+            "description": "Tool.",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "q": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "q"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "prefixanvil.bench.plan/v1",
+  "description": "Phase 3 Step 1 on a single free-tier T4. Concurrency-1 conditions are the primary (cache-accounting) measurement; concurrency-8 rows are TTFT reference values only.",
+  "conditions": [
+    {"id": "main_a_raw",  "trace": "bench_main.jsonl", "target": "direct", "concurrency": 1, "passes": 2, "warmup": "full", "label": "(a) raw, direct to vLLM"},
+    {"id": "main_b_l1",   "trace": "bench_main.jsonl", "target": "proxy", "proxy_mode": "L1", "concurrency": 1, "passes": 2, "warmup": "full", "label": "(b) prefixanvil proxy L1"},
+    {"id": "main_c_l2",   "trace": "bench_main.jsonl", "target": "proxy", "proxy_mode": "L2", "concurrency": 1, "passes": 2, "warmup": "full", "label": "(c) prefixanvil proxy L2"},
+    {"id": "xs_raw",      "trace": "bench_xsession.jsonl", "target": "direct", "concurrency": 1, "passes": 1, "warmup": 20, "optional": true, "label": "cross-session: raw"},
+    {"id": "xs_session",  "trace": "bench_xsession.jsonl", "target": "proxy", "proxy_mode": "L1", "tool_order": "session", "concurrency": 1, "passes": 1, "warmup": 20, "optional": true, "label": "cross-session: L1 session-stable tool order (Phase 2 policy)"},
+    {"id": "xs_stateless","trace": "bench_xsession.jsonl", "target": "proxy", "proxy_mode": "L1", "tool_order": "stateless", "concurrency": 1, "passes": 1, "warmup": 20, "optional": true, "label": "cross-session: L1 stateless name sort (Phase 1 policy)"},
+    {"id": "c8_a_raw",    "trace": "bench_main.jsonl", "target": "direct", "concurrency": 8, "passes": 1, "warmup": "none", "optional": true, "label": "TTFT reference, concurrency 8, raw"},
+    {"id": "c8_b_l1",     "trace": "bench_main.jsonl", "target": "proxy", "proxy_mode": "L1", "concurrency": 8, "passes": 1, "warmup": "none", "optional": true, "label": "TTFT reference, concurrency 8, L1"}
+  ]
+}

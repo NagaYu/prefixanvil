@@ -1,0 +1,26 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "system_whitespace_drift",
+  "description": "System prompt with trailing newlines, double spaces and 3+ blank lines.",
+  "session": true,
+  "expect": {
+    "L1": "match",
+    "L2": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Rules:  be brief.  \n\n\n\nAlways cite.\n\n"
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        }
+      ],
+      "temperature": 0
+    }
+  ]
+}

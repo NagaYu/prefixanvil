@@ -1,0 +1,20 @@
+{
+  "seed": 3101,
+  "sessions": 40,
+  "turns": 3,
+  "system_tokens": 1500,
+  "tools": 8,
+  "tool_burst_min": 1,
+  "tool_burst_max": 3,
+  "retry_rate": 0.05,
+  "faults": {
+    "F1": 0.06,
+    "F2": 0.06,
+    "F3": 0.06,
+    "F4": 0.06,
+    "F5": 0.06,
+    "F6": 0.06,
+    "F7": 0.06,
+    "F8": 0.06
+  }
+}

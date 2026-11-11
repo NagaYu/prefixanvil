@@ -1,0 +1,246 @@
+{
+ "env": {
+  "status": "ok",
+  "at": "2026-11-11T04:09:00Z",
+  "platform": "kaggle",
+  "python": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+  "machine": "Linux-6.18.55+-x86_64-with-glibc2.39",
+  "cpu_count": 4,
+  "disk_free_gb": 20.939579392,
+  "gpus": [
+   {
+    "index": "0",
+    "name": "Tesla T4",
+    "memory_total": "15360 MiB",
+    "driver": "580.178.04",
+    "compute_cap": "7.5"
+   },
+   {
+    "index": "1",
+    "name": "Tesla T4",
+    "memory_total": "15360 MiB",
+    "driver": "580.178.04",
+    "compute_cap": "7.5"
+   }
+  ],
+  "driver_cuda": "13.0",
+  "internet": true
+ },
+ "install": {
+  "status": "ok",
+  "at": "2026-11-11T04:11:00Z",
+  "pin": "cu13",
+  "spec": "vllm==0.33.0",
+  "versions": {
+   "torch": "2.14.0+cu132",
+   "torch_cuda": "13.2",
+   "cuda_available": true,
+   "capability": [
+    7,
+    5
+   ],
+   "vllm": "0.33.0",
+   "transformers": "5.20.2"
+  },
+  "tried": [
+   {
+    "pin": "cu13",
+    "ok": true
+   }
+  ]
+ },
+ "model": {
+  "status": "ok",
+  "at": "2026-11-11T04:11:33Z",
+  "repo": "Qwen/Qwen2.5-7B-Instruct-AWQ",
+  "revision": "b25037543e9394b818fdfca67ab2a00ecc7dd641",
+  "license": "apache-2.0",
+  "expected_license": "apache-2.0",
+  "local_dir": "/tmp/pf_models/Qwen__Qwen2.5-7B-Instruct-AWQ"
+ },
+ "server": {
+  "status": "ok",
+  "at": "2026-11-11T04:14:35Z",
+  "cmd": [
+   "/tmp/pfvenv/bin/vllm",
+   "serve",
+   "/tmp/pf_models/Qwen__Qwen2.5-7B-Instruct-AWQ",
+   "--served-model-name",
+   "pf-model",
+   "--port",
+   "8000",
+   "--host",
+   "127.0.0.1",
+   "--enable-prefix-caching",
+   "--enable-prompt-tokens-details",
+   "--dtype",
+   "half",
+   "--max-model-len",
+   "8192",
+   "--gpu-memory-utilization",
+   "0.9",
+   "--seed",
+   "0",
+   "--enable-auto-tool-choice",
+   "--tool-call-parser",
+   "hermes"
+  ],
+  "cache_config": {
+   "block_size": 16,
+   "num_gpu_blocks": 7148,
+   "hash_block_size": null,
+   "enable_prefix_caching": "True",
+   "prefix_caching_hash_algo": "sha256",
+   "raw": {
+    "_block_size_resolved": "True",
+    "block_size": "16",
+    "cache_dtype": "auto",
+    "cache_hit_alignment_tokens": "None",
+    "effective_attention_block_size": "16",
+    "enable_mamba_shared_prefix_checkpoint": "False",
+    "enable_prefix_caching": "True",
+    "engine": "0",
+    "gpu_memory_utilization": "0.9",
+    "hash_block_size": "None",
+    "is_attention_free": "False",
+    "kv_cache_dtype_skip_layers": "[]",
+    "kv_cache_layout": "None",
+    "kv_cache_max_concurrency": "13.9609375",
+    "kv_cache_memory_bytes": "None",
+    "kv_cache_size_tokens": "114368",
+    "kv_offloading_backend": "native",
+    "kv_offloading_size": "None",
+    "kv_sharing_fast_prefill": "False",
+    "mamba_block_size": "None",
+    "mamba_cache_dtype": "auto",
+    "mamba_cache_mode": "none",
+    "mamba_page_size_padded": "None",
+    "mamba_ssm_cache_dtype": "auto",
+    "num_cpu_blocks": "None",
+    "num_gpu_blocks": "7148",
+    "num_gpu_blocks_override": "None",
+    "prefix_cache_retention_interval": "0",
+    "prefix_caching_hash_algo": "sha256",
+    "prefix_match_unit": "None",
+    "replayssm_buffer_len": "16",
+    "simple_cpu_offload_num_blocks": "None",
+    "skip_page_size_padded": "None",
+    "sliding_window": "None",
+    "swa_bounded_replay": "True",
+    "use_kda_recoverssm": "False",
+    "use_replayssm": "False",
+    "user_specified_block_size": "False"
+   }
+  },
+  "attention_backend": "TRITON_ATTN",
+  "quantization_log": [
+   "AWQ",
+   "awq"
+  ],
+  "block_size_help": [
+   "--safetensors-prefetch-block-size SAFETENSORS_PREFETCH_BLOCK_SIZE",
+   "Interleave_size=block_size: block-level alignment,",
+   "--block-size BLOCK_SIZE",
+   "--mamba-block-size MAMBA_BLOCK_SIZE",
+   "cache group's `block_size` is divisible by it,",
+   "This equals to the `hash_block_size` used throughout"
+  ]
+ },
+ "traces": {
+  "status": "ok",
+  "at": "2026-11-11T04:14:35Z",
+  "traces": {
+   "bench_main": {
+    "requests": 377,
+    "labels": 150,
+    "sha256": "cee5445df3364b3fc0a2af4a1f906356d537076857a5c4059ce96a6b800ef000"
+   },
+   "bench_xsession": {
+    "requests": 155,
+    "labels": 0,
+    "sha256": "271a8a6f3c2a61e9ae4b0878285e65ac96e17bf0b08202b415bff2c3a2f819df"
+   }
+  }
+ },
+ "smoke": {
+  "status": "ok",
+  "at": "2026-11-11T04:16:01Z",
+  "result": {
+   "conditions": {
+    "smoke_direct": "complete",
+    "smoke_l1": "complete"
+   },
+   "decisions": []
+  }
+ },
+ "equiv": {
+  "status": "ok",
+  "at": "2026-11-11T04:16:02Z",
+  "returncode": 0
+ },
+ "plan": {
+  "status": "ok",
+  "at": "2026-11-11T07:04:19Z",
+  "result": {
+   "conditions": {
+    "main_a_raw": "complete",
+    "main_b_l1": "complete",
+    "main_c_l2": "complete",
+    "xs_raw": "complete",
+    "xs_session": "complete",
+    "xs_stateless": "complete",
+    "c8_a_raw": "complete",
+    "c8_b_l1": "complete"
+   },
+   "decisions": []
+  },
+  "decisions": [],
+  "budget_s": 31977.45092535019
+ },
+ "sample": {
+  "status": "ok",
+  "at": "2026-11-11T07:05:26Z",
+  "summary": {
+   "control_raw_vs_raw": {
+    "pairs": 18,
+    "match": 18,
+    "rate": 1.0
+   },
+   "warm_cache_vs_cold": {
+    "pairs": 18,
+    "match": 17,
+    "rate": 0.9444444444444444
+   },
+   "L1_vs_raw": {
+    "pairs": 18,
+    "match": 10,
+    "rate": 0.5555555555555556
+   },
+   "L1_vs_raw_changed_only": {
+    "pairs": 14,
+    "match": 6,
+    "rate": 0.42857142857142855
+   },
+   "L2_vs_raw": {
+    "pairs": 6,
+    "match": 4,
+    "rate": 0.6666666666666666
+   },
+   "L2_vs_raw_changed_only": {
+    "pairs": 3,
+    "match": 1,
+    "rate": 0.3333333333333333
+   },
+   "errors": 1
+  }
+ },
+ "fidelity": {
+  "status": "ok",
+  "at": "2026-11-11T07:06:06Z",
+  "missing": []
+ },
+ "package": {
+  "status": "ok",
+  "at": "2026-11-11T07:06:06Z"
+ }
+}

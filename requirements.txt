@@ -1,0 +1,5 @@
+# runtime: tokenizer + chat template only (no model weights, no torch)
+transformers>=4.45
+jinja2>=3.1
+# tests
+pytest>=8

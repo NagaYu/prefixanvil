@@ -1,0 +1,26 @@
+{
+  "schema": "prefixanvil.equiv-case/v1",
+  "id": "l2_volatile_lookalikes",
+  "description": "Lines that contain numbers/dates but are not volatile-only; L2 must leave them in place.",
+  "session": true,
+  "expect": {
+    "L1": "match",
+    "L2": "match"
+  },
+  "requests": [
+    {
+      "model": "agent-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Use at most 500 tokens.\nCompliance: RFC-2119\nRelease date: 2024-07-26 (stable)\nToday is Monday, March 3.\nRatio 16:9 preferred."
+        },
+        {
+          "role": "user",
+          "content": "Please help."
+        }
+      ],
+      "temperature": 0
+    }
+  ]
+}

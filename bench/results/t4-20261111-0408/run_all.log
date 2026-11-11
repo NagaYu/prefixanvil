@@ -1,0 +1,35 @@
+[2026-11-11T04:08:59Z] run t4-20261111-0408 profile=full python=/usr/bin/python3
+[2026-11-11T04:09:00Z] GPU 0: Tesla T4 15360 MiB driver 580.178.04 cc 7.5
+[2026-11-11T04:09:00Z] GPU 1: Tesla T4 15360 MiB driver 580.178.04 cc 7.5
+[2026-11-11T04:09:00Z] driver CUDA 13.0; platform kaggle
+[2026-11-11T04:09:05Z] installing vllm==0.33.0 (cu13) ... this takes several minutes
+[2026-11-11T04:11:00Z] installed: {'torch': '2.14.0+cu132', 'torch_cuda': '13.2', 'cuda_available': True, 'capability': [7, 5], 'vllm': '0.33.0', 'transformers': '5.20.2'}
+[2026-11-11T04:11:00Z] re-executing inside the venv
+[2026-11-11T04:11:00Z] run t4-20261111-0408 profile=full python=/tmp/pfvenv/bin/python
+[2026-11-11T04:11:33Z] model Qwen/Qwen2.5-7B-Instruct-AWQ@b25037543e93 license apache-2.0 -> /tmp/pf_models/Qwen__Qwen2.5-7B-Instruct-AWQ
+[2026-11-11T04:12:00Z] starting vLLM: /tmp/pfvenv/bin/vllm serve /tmp/pf_models/Qwen__Qwen2.5-7B-Instruct-AWQ --served-model-name pf-model --port 8000 --host 127.0.0.1 --enable-prefix-caching --enable-prompt-tokens-details --dtype half --max-model-len 8192 --gpu-memory-utilization 0.9 --seed 0 --enable-auto-tool-choice --tool-call-parser hermes
+[2026-11-11T04:14:35Z] server up: block_size=16 num_gpu_blocks=7148 backend=['TRITON_ATTN']
+[2026-11-11T04:14:35Z] === stage traces
+[2026-11-11T04:14:35Z] === stage smoke
+[2026-11-11T04:14:40Z] [smoke_direct] measure pass 1: 12 requests, concurrency 1
+[2026-11-11T04:15:23Z] [smoke_l1] measure pass 1: 12 requests, concurrency 1
+[2026-11-11T04:16:01Z] === stage equiv
+[2026-11-11T04:16:02Z] === stage plan
+[2026-11-11T04:16:05Z] [main_a_raw] warmup pass 0: 377 requests, concurrency 1
+[2026-11-11T04:31:47Z] [main_a_raw] measure pass 1: 377 requests, concurrency 1
+[2026-11-11T04:47:29Z] [main_a_raw] measure pass 2: 377 requests, concurrency 1
+[2026-11-11T05:03:11Z] [main_b_l1] warmup pass 0: 377 requests, concurrency 1
+[2026-11-11T05:16:45Z] [main_b_l1] measure pass 1: 377 requests, concurrency 1
+[2026-11-11T05:30:21Z] [main_b_l1] measure pass 2: 377 requests, concurrency 1
+[2026-11-11T05:43:59Z] [main_c_l2] warmup pass 0: 377 requests, concurrency 1
+[2026-11-11T05:57:16Z] [main_c_l2] measure pass 1: 377 requests, concurrency 1
+[2026-11-11T06:10:37Z] [main_c_l2] measure pass 2: 377 requests, concurrency 1
+[2026-11-11T06:23:58Z] [xs_raw] warmup pass 0: 20 requests, concurrency 1
+[2026-11-11T06:24:47Z] [xs_raw] measure pass 1: 155 requests, concurrency 1
+[2026-11-11T06:30:16Z] [xs_session] warmup pass 0: 20 requests, concurrency 1
+[2026-11-11T06:31:05Z] [xs_session] measure pass 1: 155 requests, concurrency 1
+[2026-11-11T06:36:23Z] [xs_stateless] warmup pass 0: 20 requests, concurrency 1
+[2026-11-11T06:37:01Z] [xs_stateless] measure pass 1: 155 requests, concurrency 1
+[2026-11-11T06:41:10Z] [c8_a_raw] measure pass 1: 377 requests, concurrency 8
+[2026-11-11T06:53:50Z] [c8_b_l1] measure pass 1: 377 requests, concurrency 8
+[2026-11-11T07:04:19Z] === stage sample

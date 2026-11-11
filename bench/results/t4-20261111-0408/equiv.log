@@ -1,0 +1,4 @@
+L1: 19/19 exact match (100.0%) over 15 cases
+L2: 5/6 exact match (83.3%) over 6 cases
+allowed diff: l2_volatile_lines (L2)
+equivalence: PASSED -> /kaggle/working/pf/results/t4-20261111-0408/equivalence-report.json, /kaggle/working/pf/results/t4-20261111-0408/equivalence-report.md
